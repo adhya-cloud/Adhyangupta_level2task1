@@ -1,0 +1,239 @@
+:root {
+  color-scheme: dark;
+  --bg: #15171c;
+  --panel: #22252d;
+  --display: #101216;
+  --text: #f8fafc;
+  --muted: #9aa4b2;
+  --key: #30343d;
+  --key-hover: #3b414d;
+  --utility: #4d6570;
+  --operator: #c0792c;
+  --equals: #2f8f74;
+  --shadow: rgba(0, 0, 0, 0.32);
+}
+
+body.light-theme {
+  color-scheme: light;
+  --bg: #eef1f4;
+  --panel: #ffffff;
+  --display: #e9edf1;
+  --text: #18202a;
+  --muted: #607083;
+  --key: #dfe5eb;
+  --key-hover: #cfd8e1;
+  --utility: #8fb3bf;
+  --operator: #d8903a;
+  --equals: #3aa884;
+  --shadow: rgba(25, 35, 50, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(47, 143, 116, 0.18), transparent 34rem),
+    linear-gradient(135deg, var(--bg) 0%, #24212c 100%);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calculator {
+  width: min(94vw, 430px);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 22px 60px var(--shadow);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.toolbar__button,
+.history-panel__clear {
+  min-height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--display);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0 12px;
+}
+
+.toolbar__button:hover,
+.history-panel__clear:hover {
+  color: var(--text);
+}
+
+.display {
+  min-height: 118px;
+  padding: 18px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--display);
+}
+
+.display__history {
+  width: 100%;
+  min-height: 24px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display__value {
+  width: 100%;
+  overflow: hidden;
+  color: var(--text);
+  font-size: clamp(2rem, 10vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  min-height: 64px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--key);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 700;
+  transition: background 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:active {
+  transform: translateY(1px);
+}
+
+.key:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 2px;
+}
+
+.key--utility {
+  background: var(--utility);
+}
+
+.key--memory {
+  min-height: 46px;
+  background: #685d8f;
+  font-size: 1rem;
+}
+
+.key--operator {
+  background: var(--operator);
+}
+
+.key--equals {
+  background: var(--equals);
+}
+
+.key--utility:hover,
+.key--memory:hover,
+.key--operator:hover,
+.key--equals:hover {
+  filter: brightness(1.08);
+}
+
+.history-panel {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.history-panel h1 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+}
+
+.history-list {
+  max-height: 120px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.history-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.history-list li:last-child {
+  border-bottom: 0;
+}
+
+.history-list__empty {
+  justify-content: center;
+}
+
+.history-list__result {
+  color: var(--text);
+  font-weight: 700;
+}
+
+@media (max-width: 360px) {
+  .calculator {
+    padding: 14px;
+  }
+
+  .keys {
+    gap: 8px;
+  }
+
+  .key {
+    min-height: 56px;
+    font-size: 1.1rem;
+  }
+}
